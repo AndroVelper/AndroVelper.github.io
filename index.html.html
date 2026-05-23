@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Shubham Sharma — Senior Android Engineer specializing in Kotlin, Jetpack Compose, AI integrations, BLE/NFC, and production-scale mobile applications.">
+<title>Shubham Sharma · Android Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --md-sys-color-primary: #006C51;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #89F8D3;
+    --md-sys-color-on-primary-container: #002117;
+    --md-sys-color-secondary: #1B6586;
+    --md-sys-color-secondary-container: #C6E7FF;
+    --md-sys-color-tertiary: #5C5891;
+    --md-sys-color-surface: #FAFDF9;
+    --md-sys-color-surface-variant: #DBE5DF;
+    --md-sys-color-on-surface: #191C1B;
+    --md-sys-color-on-surface-variant: #3F4944;
+    --md-sys-color-outline: #6F7975;
+    --md-sys-color-outline-variant: #BFC9C3;
+    --accent-green: #00C882;
+    --accent-blue: #0088CC;
+    --accent-purple: #7B61FF;
+    --bg-subtle: #F0F4F1;
+    --card-bg: #FFFFFF;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --font-display: 'Google Sans Display', 'Google Sans', sans-serif;
+    --font-body: 'Google Sans', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 max(24px, calc(50% - 600px));
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,253,249,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  nav.scrolled {
+    border-color: var(--md-sys-color-outline-variant);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 700;
+    color: var(--md-sys-color-primary);
+    letter-spacing: -0.3px;
+  }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    padding: 8px 14px; border-radius: 20px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links a:hover {
+    background: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-on-surface);
+  }
+  .nav-cta {
+    background: var(--md-sys-color-primary) !important;
+    color: white !important;
+    padding: 8px 20px !important; border-radius: 20px !important;
+  }
+  .nav-cta:hover { opacity: 0.9; }
+
+  /* SECTIONS */
+  section { padding: 100px max(24px, calc(50% - 600px)); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    padding-top: 120px;
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    gap: 60px;
+    align-items: center;
+    background: linear-gradient(160deg, #F0F9F5 0%, #FAFDF9 50%, #EEF4FF 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,200,130,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    font-size: 13px; font-weight: 500;
+    padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--md-sys-color-primary);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: var(--md-sys-color-on-surface);
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-title .highlight {
+    color: var(--md-sys-color-primary);
+    position: relative;
+    display: inline-block;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 20px 0 36px;
+    max-width: 480px;
+    line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .hero-tag {
+    font-size: 13px; font-weight: 500;
+    padding: 6px 16px; border-radius: 20px;
+    border: 1.5px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    background: white;
+  }
+  .hero-actions {
+    display: flex; gap: 12px;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-sys-color-primary);
+    color: white;
+    text-decoration: none;
+    font-size: 15px; font-weight: 500;
+    padding: 14px 28px; border-radius: 28px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(0,108,81,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,108,81,0.35); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    font-size: 15px; font-weight: 500;
+    padding: 14px 28px; border-radius: 28px;
+    border: 1.5px solid var(--md-sys-color-primary);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--md-sys-color-primary-container); }
+
+  /* PHONE MOCKUP */
+  .phone-container {
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeUp 0.8s 0.2s ease both;
+    position: relative;
+  }
+  .phone-frame {
+    width: 260px; height: 520px;
+    background: #1A1A1A;
+    border-radius: 44px;
+    padding: 14px;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1) inset;
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #0A0A0A;
+    position: relative;
+  }
+  .phone-notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 30px;
+    background: #1A1A1A;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+  }
+  .app-slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: 40px 16px 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(20px);
+  }
+  .app-slide.active { opacity: 1; transform: translateY(0); }
+  .app-slide-1 { background: linear-gradient(160deg, #003322 0%, #006C51 100%); }
+  .app-slide-2 { background: linear-gradient(160deg, #001428 0%, #003366 100%); }
+  .app-slide-3 { background: linear-gradient(160deg, #1A0033 0%, #4A2080 100%); }
+  .app-slide-4 { background: linear-gradient(160deg, #1A1000 0%, #5C3A00 100%); }
+  .app-icon-row { display: flex; gap: 8px; margin-bottom: 20px; }
+  .app-icon {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 700;
+  }
+  .app-screen-label {
+    font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .app-screen-title { font-size: 18px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .app-screen-sub { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 16px; }
+  .app-metric-row { display: flex; gap: 8px; }
+  .app-metric {
+    flex: 1; background: rgba(255,255,255,0.1); border-radius: 12px; padding: 10px;
+  }
+  .app-metric-val { font-size: 20px; font-weight: 700; color: white; }
+  .app-metric-lbl { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .app-bar-container { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .app-bar-row { display: flex; align-items: center; gap: 8px; }
+  .app-bar-lbl { font-size: 10px; color: rgba(255,255,255,0.5); width: 60px; flex-shrink: 0; }
+  .app-bar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+  .app-bar-fill { height: 100%; border-radius: 3px; }
+  .phone-dots {
+    position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px;
+  }
+  .phone-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--md-sys-color-outline-variant);
+    transition: background 0.3s, width 0.3s;
+  }
+  .phone-dot.active { background: var(--md-sys-color-primary); width: 20px; border-radius: 3px; }
+  .phone-glow {
+    position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 100px;
+    background: radial-gradient(ellipse, rgba(0,200,130,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* METRICS SECTION */
+  #metrics {
+    background: var(--md-sys-color-on-surface);
+    color: white;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .metrics-label {
+    font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 12px;
+  }
+  .metrics-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: white;
+    margin-bottom: 48px;
+  }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .metric-card {
+    background: rgba(255,255,255,0.03);
+    padding: 32px 28px;
+    transition: background 0.2s;
+  }
+  .metric-card:hover { background: rgba(255,255,255,0.07); }
+  .metric-icon {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: 40px; font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: white;
+  }
+  .metric-value span { color: var(--accent-green); }
+  .metric-desc { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--bg-subtle); }
+  .section-label {
+    font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 17px; color: var(--md-sys-color-on-surface-variant);
+    max-width: 540px; margin-bottom: 56px;
+  }
+  .timeline { display: flex; flex-direction: column; gap: 16px; }
+  .timeline-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .timeline-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .timeline-card.expanded { box-shadow: var(--shadow-lg); }
+  .timeline-header {
+    padding: 24px 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .company-logo {
+    width: 52px; height: 52px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .company-info { flex: 1; }
+  .company-name { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+  .company-role { font-size: 14px; color: var(--md-sys-color-on-surface-variant); }
+  .company-period {
+    font-size: 13px; color: var(--md-sys-color-on-surface-variant);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .expand-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-subtle);
+    transition: transform 0.3s, background 0.2s;
+    font-size: 18px;
+    color: var(--md-sys-color-on-surface-variant);
+    flex-shrink: 0;
+  }
+  .timeline-card.expanded .expand-icon { transform: rotate(180deg); background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); }
+  .timeline-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid transparent;
+  }
+  .timeline-card.expanded .timeline-body {
+    max-height: 1200px;
+    border-color: var(--md-sys-color-outline-variant);
+  }
+  .timeline-inner { padding: 28px; }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .project-card {
+    border-radius: var(--radius-md);
+    padding: 20px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--bg-subtle);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 0 0 3px rgba(0,108,81,0.08);
+  }
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .project-name { font-size: 15px; font-weight: 600; }
+  .project-link {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: white; border: 1px solid var(--md-sys-color-outline-variant);
+    text-decoration: none; color: var(--md-sys-color-primary);
+    font-size: 14px; flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .project-link:hover { background: var(--md-sys-color-primary); color: white; }
+  .project-desc { font-size: 13px; color: var(--md-sys-color-on-surface-variant); margin-bottom: 14px; line-height: 1.5; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-tag {
+    font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 12px;
+    background: white;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    font-family: var(--font-mono);
+  }
+  .impact-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  .impact-badge.green { background: #E6F9F1; color: #006C40; }
+  .impact-badge.blue { background: #E1F0FF; color: #004E8C; }
+
+  /* EXPERTISE */
+  #expertise { background: white; }
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .expertise-card {
+    background: var(--bg-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .expertise-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .expertise-icon {
+    width: 52px; height: 52px;
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+  .expertise-title { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .expertise-desc { font-size: 14px; color: var(--md-sys-color-on-surface-variant); line-height: 1.6; margin-bottom: 16px; }
+  .flow-diagram {
+    display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  }
+  .flow-node {
+    font-size: 11px; font-weight: 500;
+    padding: 4px 10px; border-radius: 8px;
+    font-family: var(--font-mono);
+  }
+  .flow-arrow { color: var(--md-sys-color-outline); font-size: 14px; }
+  .flow-node.primary { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+  .flow-node.secondary { background: var(--md-sys-color-secondary-container); color: #003355; }
+  .flow-node.neutral { background: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant); }
+
+  /* TECH STACK */
+  #techstack { background: var(--bg-subtle); }
+  .chips-container {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-top: 48px;
+  }
+  .tech-chip {
+    display: flex; align-items: center; gap: 10px;
+    background: white;
+    border: 1.5px solid var(--md-sys-color-outline-variant);
+    border-radius: 20px;
+    padding: 10px 18px;
+    font-size: 14px; font-weight: 500;
+    cursor: default;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: var(--md-sys-color-on-surface);
+  }
+  .tech-chip:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: var(--shadow-md);
+    border-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-primary);
+  }
+  .tech-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--md-sys-color-primary);
+    color: white;
+  }
+  .contact-inner { max-width: 640px; }
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .contact-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    text-decoration: none;
+    font-size: 15px; font-weight: 500;
+    padding: 14px 24px;
+    border-radius: 28px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+  }
+  .contact-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+  .contact-btn.white-btn {
+    background: white; color: var(--md-sys-color-primary);
+    border-color: white;
+    font-weight: 600;
+  }
+  .contact-btn.white-btn:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    #hero { grid-template-columns: 1fr; padding-top: 100px; }
+    .phone-container { display: none; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding-left: 20px; padding-right: 20px; }
+  }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+  }
+
+  /* COUNTER */
+  .count-up { display: inline; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Shubham Sharma</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#techstack">Stack</a>
+    <button onclick="document.getElementById('hire-modal').style.display='flex'" class="nav-cta" style="border:none;cursor:pointer;font-family:inherit;font-size:14px">Hire Me</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Available · Remote · Relocation · Pan India
+    </div>
+    <h1 class="hero-title">
+      Building Android<br>
+      apps that <span class="highlight">scale</span>
+    </h1>
+    <p class="hero-sub">
+      Senior Android Engineer with 3+ years shipping production apps across AI, IoT, AR, POS, and ride-hailing — trusted by real users, built for real scale.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Kotlin &amp; Jetpack Compose</span>
+      <span class="hero-tag">Clean Architecture</span>
+      <span class="hero-tag">AI Integrations</span>
+      <span class="hero-tag">BLE / NFC / IoT</span>
+      <span class="hero-tag">Play Store Veteran</span>
+    </div>
+    <div class="hero-actions">
+    </div>
+  </div>
+
+  <div class="phone-container">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+
+        <!-- Slide 1: Virtufy AI -->
+        <div class="app-slide app-slide-1 active" id="slide-0">
+          <div class="app-icon-row">
+            <div class="app-icon" style="background:rgba(0,200,130,0.15)">🪄</div>
+            <div style="padding-top:4px">
+              <div class="app-screen-label">AI Platform</div>
+              <div style="font-size:14px;font-weight:600;color:white">Virtufy</div>
+            </div>
+          </div>
+          <div class="app-screen-sub">Virtual try-on &amp; marketplace</div>
+          <div class="app-metric-row">
+            <div class="app-metric"><div class="app-metric-val">50%</div><div class="app-metric-lbl">Load time ↓</div></div>
+            <div class="app-metric"><div class="app-metric-val">60fps</div><div class="app-metric-lbl">Render</div></div>
+          </div>
+          <div class="app-bar-container">
+            <div class="app-bar-row"><div class="app-bar-lbl">Image opt.</div><div class="app-bar-track"><div class="app-bar-fill" style="width:90%;background:#00C882"></div></div></div>
+            <div class="app-bar-row"><div class="app-bar-lbl">Cache hit</div><div class="app-bar-track"><div class="app-bar-fill" style="width:85%;background:#00A870"></div></div></div>
+            <div class="app-bar-row"><div class="app-bar-lbl">AI render</div><div class="app-bar-track"><div class="app-bar-fill" style="width:75%;background:#007A50"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Clap to Find -->
+        <div class="app-slide app-slide-2" id="slide-1">
+          <div class="app-icon-row">
+            <div class="app-icon" style="background:rgba(0,136,204,0.2)">👋</div>
+            <div style="padding-top:4px">
+              <div class="app-screen-label">Security App</div>
+              <div style="font-size:14px;font-weight:600;color:white">Clap to Find</div>
+            </div>
+          </div>
+          <div class="app-screen-sub">Anti-theft &amp; sensor detection</div>
+          <div class="app-metric-row">
+            <div class="app-metric"><div class="app-metric-val">90%</div><div class="app-metric-lbl">Accuracy ↑</div></div>
+            <div class="app-metric"><div class="app-metric-val">40%</div><div class="app-metric-lbl">Battery ↓</div></div>
+          </div>
+          <div class="app-bar-container">
+            <div class="app-bar-row"><div class="app-bar-lbl">Mic detect</div><div class="app-bar-track"><div class="app-bar-fill" style="width:92%;background:#0088CC"></div></div></div>
+            <div class="app-bar-row"><div class="app-bar-lbl">Motion</div><div class="app-bar-track"><div class="app-bar-fill" style="width:88%;background:#0066AA"></div></div></div>
+            <div class="app-bar-row"><div class="app-bar-lbl">BG service</div><div class="app-bar-track"><div class="app-bar-fill" style="width:95%;background:#004488"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Horse Hoof AI -->
+        <div class="app-slide app-slide-3" id="slide-2">
+          <div class="app-icon-row">
+            <div class="app-icon" style="background:rgba(123,97,255,0.2)">🐴</div>
+            <div style="padding-top:4px">
+              <div class="app-screen-label">AI Healthcare</div>
+              <div style="font-size:14px;font-weight:600;color:white">HorseHoof</div>
+            </div>
+          </div>
+          <div class="app-screen-sub">AI hoof scan &amp; health analysis</div>
+          <div class="app-metric-row">
+            <div class="app-metric"><div class="app-metric-val">AI</div><div class="app-metric-lbl">Vision scan</div></div>
+            <div class="app-metric"><div class="app-metric-val">Solo</div><div class="app-metric-lbl">Ownership</div></div>
+          </div>
+          <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,0.5)">Architecture</div>
+          <div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap">
+            <span style="font-size:10px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:3px 8px;border-radius:8px">Multi-Module</span>
+            <span style="font-size:10px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:3px 8px;border-radius:8px">Jetpack Compose</span>
+            <span style="font-size:10px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:3px 8px;border-radius:8px">Clean Arch</span>
+          </div>
+        </div>
+
+        <!-- Slide 4: Blyott IoT -->
+        <div class="app-slide app-slide-4" id="slide-3">
+          <div class="app-icon-row">
+            <div class="app-icon" style="background:rgba(200,140,0,0.2)">📡</div>
+            <div style="padding-top:4px">
+              <div class="app-screen-label">IoT Healthcare</div>
+              <div style="font-size:14px;font-weight:600;color:white">Blyott</div>
+            </div>
+          </div>
+          <div class="app-screen-sub">BLE asset tracking &amp; NFC</div>
+          <div class="app-metric-row">
+            <div class="app-metric"><div class="app-metric-val">60%</div><div class="app-metric-lbl">Crash ↓</div></div>
+            <div class="app-metric"><div class="app-metric-val">BLE</div><div class="app-metric-lbl">+ NFC</div></div>
+          </div>
+          <div class="app-bar-container">
+            <div class="app-bar-row"><div class="app-bar-lbl">Beacon</div><div class="app-bar-track"><div class="app-bar-fill" style="width:88%;background:#C88000"></div></div></div>
+            <div class="app-bar-row"><div class="app-bar-lbl">NFC scan</div><div class="app-bar-track"><div class="app-bar-fill" style="width:82%;background:#A06800"></div></div></div>
+            <div class="app-bar-row"><div class="app-bar-lbl">Stability</div><div class="app-bar-track"><div class="app-bar-fill" style="width:95%;background:#785000"></div></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="phone-dots">
+      <div class="phone-dot active" id="dot-0"></div>
+      <div class="phone-dot" id="dot-1"></div>
+      <div class="phone-dot" id="dot-2"></div>
+      <div class="phone-dot" id="dot-3"></div>
+    </div>
+    <div class="phone-glow"></div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics">
+  <div class="reveal"><p class="metrics-label">Engineering Impact</p></div>
+  <div class="reveal reveal-delay-1"><h2 class="metrics-title">Production-scale systems.<br>Measurable results.</h2></div>
+  <div class="metrics-grid reveal reveal-delay-2">
+    <div class="metric-card">
+      <div class="metric-icon" style="background:rgba(0,200,130,0.15)">📱</div>
+      <div class="metric-value"><span class="count-up" data-target="1" data-suffix="Cr+">0</span></div>
+      <div class="metric-desc">App downloads across shipped Play Store applications</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:rgba(0,136,204,0.15)">👥</div>
+      <div class="metric-value"><span class="count-up" data-target="300" data-suffix="K+">0</span></div>
+      <div class="metric-desc">Active users on production apps maintained in real-time</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:rgba(123,97,255,0.15)">⚡</div>
+      <div class="metric-value"><span class="count-up" data-target="5" data-suffix="×">0</span></div>
+      <div class="metric-desc">AR pipeline speed improvement on BITT-SMART (15s → 3s)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:rgba(255,150,0,0.15)">🎯</div>
+      <div class="metric-value"><span class="count-up" data-target="90" data-suffix="%">0</span></div>
+      <div class="metric-desc">Sensor detection accuracy improvement via multi-sensor fusion</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:rgba(0,200,130,0.15)">🔵</div>
+      <div class="metric-value"><span class="count-up" data-target="60" data-suffix="%">0</span></div>
+      <div class="metric-desc">Crash rate reduction in Blyott IoT healthcare platform</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:rgba(0,136,204,0.15)">🚀</div>
+      <div class="metric-value"><span class="count-up" data-target="6" data-suffix="+">0</span></div>
+      <div class="metric-desc">Production applications shipped end-to-end to Play Store</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal"><p class="section-label">Work Experience</p></div>
+  <div class="reveal reveal-delay-1"><h2 class="section-title">Where I've built things</h2></div>
+  <div class="reveal reveal-delay-2"><p class="section-sub">3+ years shipping production Android applications across diverse domains — from AI to IoT to defence.</p></div>
+
+  <div class="timeline reveal reveal-delay-3">
+
+    <!-- Chicmic Studios -->
+    <div class="timeline-card" onclick="toggleCard(this)">
+      <div class="timeline-header">
+        <div class="company-logo" style="background:#E8F5EF;color:#006C40;font-size:14px">C</div>
+        <div class="company-info">
+          <div class="company-name">Chicmic</div>
+          <div class="company-role">Associate Software Developer</div>
+        </div>
+        <div class="company-period">Aug 2023<br>Present</div>
+        <div class="expand-icon">⌄</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-inner">
+          <div class="project-grid">
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">🪄 Horse Hoof</div>
+                <span></span>
+              </div>
+              <div class="impact-badge green">Solo ownership · AI + Compose</div>
+              <div class="project-desc">Independently architected multi-module Jetpack Compose app with AI hoof-scan analysis, computer vision integration, and real-time health result generation.</div>
+              <div class="project-tags">
+                <span class="project-tag">Compose</span>
+                <span class="project-tag">Clean Arch</span>
+                <span class="project-tag">AI/CV</span>
+                <span class="project-tag">Multi-Module</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">👋 Clap to Find</div>
+                <a href="https://play.google.com/store/apps/details?id=com.frimustechnologies.claptofind" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge green">90% accuracy · 40% battery ↓</div>
+              <div class="project-desc">Re-architected background services with multi-sensor fusion (mic + motion). Full UI/UX overhaul. Eliminated ANRs and reduced battery drain.</div>
+              <div class="project-tags">
+                <span class="project-tag">Sensor Fusion</span>
+                <span class="project-tag">Foreground Svc</span>
+                <span class="project-tag">Broadcast Rx</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">📸 BITT-SMART AR</div>
+                <a href="https://www.curtiscarmichael.ca/book" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge green">5× speed · 15s → 3s</div>
+              <div class="project-desc">Re-engineered AR image-recognition pipeline with optimized frame processing, cutting scan-to-playback latency by 5×.</div>
+              <div class="project-tags">
+                <span class="project-tag">AR SDK</span>
+                <span class="project-tag">Frame Processing</span>
+                <span class="project-tag">Performance</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">🤝 Better Together</div>
+                <a href="https://play.google.com/store/apps/details?id=com.bettertogether.us" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge blue">300K+ active users</div>
+              <div class="project-desc">AI-driven features, REST API optimization (30% fewer calls), and Maps SDK location accuracy improvements on a 300K+ user platform.</div>
+              <div class="project-tags">
+                <span class="project-tag">AI Features</span>
+                <span class="project-tag">Maps SDK</span>
+                <span class="project-tag">API Opt.</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">🛡️ ATAK Plugins</div>
+                <span></span>
+              </div>
+              <div class="impact-badge blue">Defence · Mission-critical</div>
+              <div class="project-desc">Custom ATAK plugins with real-time BT smartwatch command sync. Bidirectional data-flow architecture for low-latency tactical field ops.</div>
+              <div class="project-tags">
+                <span class="project-tag">ATAK SDK</span>
+                <span class="project-tag">BLE</span>
+                <span class="project-tag">Real-time</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">🧾 Clover POS</div>
+                <a href="https://www.ordermate-app.com/" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge green">35% lookup time ↓</div>
+              <div class="project-desc">Optimized POS performance with improved search indexing, filtering algorithm redesign, and dialog flow streamlining.</div>
+              <div class="project-tags">
+                <span class="project-tag">Clover SDK</span>
+                <span class="project-tag">B2B POS</span>
+                <span class="project-tag">Performance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chicmic Technologies -->
+    <div class="timeline-card" onclick="toggleCard(this)">
+      <div class="timeline-header">
+        <div class="company-logo" style="background:#E1F0FF;color:#004E8C;font-size:14px">C</div>
+        <div class="company-info">
+          <div class="company-name">Chicmic</div>
+          <div class="company-role">Software Developer Intern</div>
+        </div>
+        <div class="company-period">Jan 2023<br>Aug 2023</div>
+        <div class="expand-icon">⌄</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-inner">
+          <div class="project-grid">
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">🪄 Virtufy AI Try-On</div>
+                <a href="https://play.google.com/store/search?q=virtufy&c=apps" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge green">50% load time ↓ · 60fps</div>
+              <div class="project-desc">Image optimization pipelines, ExoPlayer lazy loading, offline-first caching, and in-app chat for a media-heavy AI try-on marketplace.</div>
+              <div class="project-tags">
+                <span class="project-tag">ExoPlayer</span>
+                <span class="project-tag">Offline Cache</span>
+                <span class="project-tag">AI Try-On</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">📡 Blyott IoT</div>
+                <a href="https://play.google.com/store/apps/details?id=com.blyott.blyottmobileapp" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge green">60% crash reduction</div>
+              <div class="project-desc">BLE beacon scanning, NFC comms, battery-aware background scheduling for hospital asset tracking. Enterprise-grade stability improvements.</div>
+              <div class="project-tags">
+                <span class="project-tag">BLE</span>
+                <span class="project-tag">NFC</span>
+                <span class="project-tag">Beacon</span>
+                <span class="project-tag">IoT</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">🚗 Wizzcab</div>
+                <a href="https://play.google.com/store/apps/details?id=com.wizzcabs.driver&hl=en-US" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge blue">Full app from scratch</div>
+              <div class="project-desc">Built full ride-hailing driver app: real-time GPS, taximeter, dynamic fare engine, booking state machine, Socket.IO event streaming.</div>
+              <div class="project-tags">
+                <span class="project-tag">Socket.IO</span>
+                <span class="project-tag">GPS Tracking</span>
+                <span class="project-tag">Fare Engine</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-name">👥 People-i</div>
+                <a href="https://play.google.com/store/apps/details?id=com.peopleperfectae" target="_blank" class="project-link">↗</a>
+              </div>
+              <div class="impact-badge blue">10K+ enterprise employees</div>
+              <div class="project-desc">GPS spoof-detection, Maps SDK integration, REST API optimization for enterprise workforce attendance tracking at scale.</div>
+              <div class="project-tags">
+                <span class="project-tag">Maps SDK</span>
+                <span class="project-tag">Spoof Detection</span>
+                <span class="project-tag">Enterprise</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:16px;background:linear-gradient(135deg,#E8F5EF,#E1F0FF);border-radius:var(--radius-md);border:1px solid var(--md-sys-color-outline-variant)">
+            <div style="font-size:14px;font-weight:600;color:var(--md-sys-color-primary);margin-bottom:4px">🏆 Best Intern Award</div>
+            <div style="font-size:13px;color:var(--md-sys-color-on-surface-variant)">Recognized by company leadership for outstanding technical output, code quality, and delivery performance across multiple client-facing Android applications during internship (Jan–Aug 2023).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="reveal"><p class="section-label">Android Expertise</p></div>
+  <div class="reveal reveal-delay-1"><h2 class="section-title">Engineering depth at every layer</h2></div>
+  <div class="reveal reveal-delay-2"><p class="section-sub">From architecture patterns to system-level Android, I build with production in mind.</p></div>
+  <div class="expertise-grid">
+    <div class="expertise-card reveal">
+      <div class="expertise-icon" style="background:#E8F5EF">🏗️</div>
+      <div class="expertise-title">Clean Architecture + MVVM</div>
+      <div class="expertise-desc">Multi-module projects with strict separation between data, domain, and presentation layers. Scalable and testable from day one.</div>
+      <div class="flow-diagram">
+        <span class="flow-node neutral">UI</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node primary">ViewModel</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node secondary">UseCase</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node neutral">Repo</span>
+      </div>
+    </div>
+    <div class="expertise-card reveal reveal-delay-1">
+      <div class="expertise-icon" style="background:#E1F0FF">📡</div>
+      <div class="expertise-title">BLE / NFC / IoT Systems</div>
+      <div class="expertise-desc">Hardware-level Android integrations: BLE beacon scanning, NFC tag communication, battery-aware background scheduling, enterprise asset tracking.</div>
+      <div class="flow-diagram">
+        <span class="flow-node neutral">BLE Scan</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node primary">Beacon Rx</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node secondary">Asset Map</span>
+      </div>
+    </div>
+    <div class="expertise-card reveal reveal-delay-2">
+      <div class="expertise-icon" style="background:#F0ECFF">🎬</div>
+      <div class="expertise-title">Media & Performance Optimization</div>
+      <div class="expertise-desc">ExoPlayer pipelines, lazy loading strategies, offline-first caching, memory leak detection, and 60fps rendering on mid-range devices.</div>
+      <div class="flow-diagram">
+        <span class="flow-node neutral">Request</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node primary">Cache?</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node secondary">Render</span>
+      </div>
+    </div>
+    <div class="expertise-card reveal">
+      <div class="expertise-icon" style="background:#FFF3E0">⚙️</div>
+      <div class="expertise-title">Background Services & Sensors</div>
+      <div class="expertise-desc">Foreground services, broadcast receivers, multi-sensor fusion (microphone, accelerometer, gyroscope), WorkManager, and system-level Android APIs.</div>
+      <div class="flow-diagram">
+        <span class="flow-node neutral">Sensor</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node primary">Fusion</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node secondary">Action</span>
+      </div>
+    </div>
+    <div class="expertise-card reveal reveal-delay-1">
+      <div class="expertise-icon" style="background:#E8F5EF">🤖</div>
+      <div class="expertise-title">AI / ML Integration</div>
+      <div class="expertise-desc">On-device and cloud AI integrations for computer vision (hoof scanning), virtual try-on, personalization, and image analysis workflows.</div>
+      <div class="flow-diagram">
+        <span class="flow-node neutral">Image</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node primary">AI Model</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node secondary">Results</span>
+      </div>
+    </div>
+    <div class="expertise-card reveal reveal-delay-2">
+      <div class="expertise-icon" style="background:#E1F0FF">🔄</div>
+      <div class="expertise-title">Real-Time Systems</div>
+      <div class="expertise-desc">Socket.IO event streaming, GPS real-time tracking, ride-hailing state machines, live data flows with Kotlin Coroutines and Flow.</div>
+      <div class="flow-diagram">
+        <span class="flow-node neutral">Socket</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node primary">Flow</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node secondary">UI State</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="techstack">
+  <div class="reveal"><p class="section-label">Tech Stack</p></div>
+  <div class="reveal reveal-delay-1"><h2 class="section-title">The tools I ship with</h2></div>
+  <div class="chips-container reveal reveal-delay-2">
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#7F52FF"></span>Kotlin</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#E76F00"></span>Java</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#4285F4"></span>Jetpack Compose</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#00C882"></span>Coroutines &amp; Flow</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#FF6D00"></span>Firebase</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#00ACC1"></span>BLE / Bluetooth</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#6200EA"></span>NFC</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#0097A7"></span>Beacon Scanning</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#388E3C"></span>Room Database</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#1976D2"></span>Retrofit</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#E53935"></span>ExoPlayer</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#F57F17"></span>Google Maps SDK</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#512DA8"></span>MVVM + Clean Arch</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#00838F"></span>Koin (DI)</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#2E7D32"></span>AR SDK</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#1565C0"></span>AI Integration</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#4527A0"></span>Socket.IO</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#00695C"></span>Flutter / Dart</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#424242"></span>Clover SDK</div>
+    <div class="tech-chip"><span class="tech-chip-dot" style="background:#880E4F"></span>ATAK Plugin SDK</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-title">Let's build scalable mobile experiences.</h2>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="contact-sub">Open to full-time remote roles, senior Android positions, and visa-sponsored opportunities worldwide. I bring production-grade thinking to every line of code.</p>
+    </div>
+    <div class="contact-links reveal reveal-delay-2">
+      <button onclick="document.getElementById('hire-modal').style.display='flex'" class="contact-btn white-btn" style="border:none;cursor:pointer;font-family:inherit;font-size:15px">✉ Contact Me</button>
+      <a href="https://www.linkedin.com/in/shubham-sharma-547618246" target="_blank" class="contact-btn">LinkedIn ↗</a>
+      <a href="https://github.com/AndroVelper" target="_blank" class="contact-btn">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Shubham Sharma · Android Engineer · Built with Kotlin-level precision ☕
+</footer>
+
+<script>
+// NAV scroll behavior
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Phone slideshow
+let currentSlide = 0;
+const slides = document.querySelectorAll('.app-slide');
+const dots = document.querySelectorAll('.phone-dot');
+function goToSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+setInterval(() => goToSlide((currentSlide + 1) % slides.length), 3000);
+dots.forEach((dot, i) => dot.addEventListener('click', () => goToSlide(i)));
+
+// Expand/collapse timeline cards
+function toggleCard(card) {
+  const wasExpanded = card.classList.contains('expanded');
+  document.querySelectorAll('.timeline-card').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) card.classList.add('expanded');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counter animation
+function animateCounters() {
+  document.querySelectorAll('.count-up').forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = !Number.isInteger(target);
+    let start = 0;
+    const duration = 1800;
+    const startTime = performance.now();
+    function step(now) {
+      const t = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = eased * target;
+      el.textContent = (isDecimal ? val.toFixed(1) : Math.round(val)) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+const metricsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) { animateCounters(); metricsObserver.disconnect(); }
+}, { threshold: 0.3 });
+metricsObserver.observe(document.getElementById('metrics'));
+</script>
+<!-- HIRE ME MODAL -->
+<div id="hire-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:white;border-radius:24px;padding:36px;max-width:400px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,0.2);position:relative;animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both">
+    <button onclick="document.getElementById('hire-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;font-size:22px;color:#999;line-height:1">×</button>
+    <div style="width:52px;height:52px;border-radius:16px;background:#E8F5EF;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px">👋</div>
+    <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--md-sys-color-on-surface);margin-bottom:6px">Let's connect</h3>
+    <p style="font-size:14px;color:var(--md-sys-color-on-surface-variant);margin-bottom:28px;line-height:1.6">Reach out directly — I typically respond within 24 hours.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <a href="tel:+917973832478" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;border:1.5px solid var(--md-sys-color-outline-variant);text-decoration:none;color:var(--md-sys-color-on-surface);transition:border-color 0.2s,box-shadow 0.2s" onmouseover="this.style.borderColor='var(--md-sys-color-primary)';this.style.boxShadow='0 0 0 3px rgba(0,108,81,0.08)'" onmouseout="this.style.borderColor='var(--md-sys-color-outline-variant)';this.style.boxShadow='none'">
+        <div style="width:40px;height:40px;border-radius:12px;background:#E8F5EF;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📞</div>
+        <div>
+          <div style="font-size:11px;color:var(--md-sys-color-on-surface-variant);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.5px">Phone</div>
+          <div style="font-size:16px;font-weight:600;font-family:var(--font-mono)">+91 79738 32478</div>
+        </div>
+      </a>
+      <a href="mailto:shubham1901289@gmail.com" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;border:1.5px solid var(--md-sys-color-outline-variant);text-decoration:none;color:var(--md-sys-color-on-surface);transition:border-color 0.2s,box-shadow 0.2s" onmouseover="this.style.borderColor='var(--md-sys-color-primary)';this.style.boxShadow='0 0 0 3px rgba(0,108,81,0.08)'" onmouseout="this.style.borderColor='var(--md-sys-color-outline-variant)';this.style.boxShadow='none'">
+        <div style="width:40px;height:40px;border-radius:12px;background:#E1F0FF;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">✉️</div>
+        <div>
+          <div style="font-size:11px;color:var(--md-sys-color-on-surface-variant);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.5px">Email</div>
+          <div style="font-size:15px;font-weight:600;font-family:var(--font-mono)">shubham1901289@gmail.com</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<style>
+@keyframes modalIn {
+  from { opacity:0; transform:scale(0.9) translateY(16px); }
+  to { opacity:1; transform:scale(1) translateY(0); }
+}
+</style>
+
+</body>
+</html>
